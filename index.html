@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html, body{
+            height: 100%;
+            width: 100%;
+        }
+        body{
+            overflow-y: hidden;
+        }
+        section{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            transition-duration: 1s;
+        }
+        .s1{
+            bottom: 0;
+            background-color: rgb(255, 162, 162);
+            z-index: 1;
+        } 
+        .s2{
+            bottom: -100%;
+            background-color: rgb(176, 255, 176);
+            z-index: 2;
+        }
+        .s3{
+            bottom: -200%;
+            background-color: rgb(184, 255, 255);
+            z-index: 3;
+        } 
+        .s4{
+            bottom: -300%;
+            background-color: rgb(240, 164, 255);
+            z-index: 4;
+        }
+    </style>
+</head>
+<body>
+    <section class="s1"></section>
+    <section class="s2"></section>
+    <section class="s3"></section>
+    <section class="s4"></section>
+
+    <script>
+        let sections = document.getElementsByTagName('section');
+        let sectionsPos = sections[0].clientHeight;
+        let pos = [0,1,2,3];
+        
+        addEventListener("mousewheel",e => {
+            //scroll up
+            if(e.deltaY > 0 && pos[0] > -3){
+                for(let i = 0; i < pos.length; i++){
+                    pos[i]--;
+                }
+                console.log("pos[0] = "+ pos[0]);
+                sections[0].style.bottom = '-'+sectionsPos * pos[0]+'px';
+                sections[1].style.bottom = '-'+sectionsPos * pos[1]+'px';
+                sections[2].style.bottom = '-'+sectionsPos * pos[2]+'px';
+                sections[3].style.bottom = '-'+sectionsPos * pos[3]+'px';
+            }
+            //scroll down
+            else if(e.deltaY < 0 && pos[0] < 0){
+                for(let i = 0; i < pos.length; i++){
+                    pos[i]++;
+                }
+                console.log("pos[0] = "+ pos[0]);
+                sections[0].style.bottom = '-'+sectionsPos * pos[0]+'px';
+                sections[1].style.bottom = '-'+sectionsPos * pos[1]+'px';
+                sections[2].style.bottom = '-'+sectionsPos * pos[2]+'px';
+                sections[3].style.bottom = '-'+sectionsPos * pos[3]+'px';
+            }
+        })
+    </script>
+</body>
+</html>
